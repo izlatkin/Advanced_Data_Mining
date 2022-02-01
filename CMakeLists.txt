@@ -9,6 +9,5 @@ set(CMAKE_CXX_STANDARD 11)
 #        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 
-add_executable(data_mining
-        adm.cpp)
+add_executable(data_mining adm.cpp)
 
