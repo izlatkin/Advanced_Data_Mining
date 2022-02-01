@@ -38,6 +38,10 @@ int find_mode(vector<int> v){
             number = v[i];
         }
     }
+    if (count > countMode){
+        countMode = count;
+        mode = number;
+    }
     return mode;
 }
 
@@ -82,14 +86,14 @@ void calculate_stat_for_vector(string name, vector<int> v){
     if (size % 2 == 0){
         v_median = (sorted_v[size / 2] +  sorted_v[size / 2 - 1]) / 2;
     }else{
-        v_median = sorted_v[size / 2];
+        v_median = sorted_v[size / 2 - 1];
     }
     if (size % 4 == 0 | size % 4 == 1){
         v_Q1 = 1.0 * (sorted_v[size / 4] +  sorted_v[size / 4 - 1]) / 2;
         v_Q3 = 1.0 * (sorted_v[3 * size / 4] +  sorted_v[3 * size / 4 + 1]) / 2;
     }else{
-        v_Q1 = 1.0 * sorted_v[size / 4];
-        v_Q3 = 1.0 * sorted_v[size / 4];
+        v_Q1 = 1.0 * sorted_v[size / 4 - 1];
+        v_Q3 = 1.0 * sorted_v[3 * size / 4 - 1]; //ToDo : check "-1"
     }
 
     printf("%s: Max - %d, min - %d, median - %.3lf, Q1 - %.3lf, Q3 - %.3lf \n",
@@ -114,17 +118,11 @@ void read_score(){
 void allocate_memory_hierarchy_stucture(){
 }
 
-/*
- * print statistics
- */
-
-void print_stat(){
-
-}
-
 void main_pipeline(){
     calculate_stat_for_vector("Midterm", midterm);
     calculate_stat_for_vector("Final", final);
+    vector<int> tmp {13, 15, 16, 16, 19, 20, 20, 21, 22, 22, 25, 25, 25, 25, 30, 33, 33, 35, 35, 35, 35, 36, 40, 45, 46, 52, 70};
+    calculate_stat_for_vector("test", tmp);
 }
 
 int main()
@@ -135,8 +133,6 @@ int main()
     read_score();
     //calculate values
     main_pipeline();
-    //print statictics
-    print_stat();
     return 0;
 }
 
