@@ -7,14 +7,13 @@
 
 #include <cctype>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-typedef struct {
-    unsigned int id;
-    unsigned int midterm;
-    unsigned int final;
-} student;
+vector<int> id;
+vector<int> midterm;
+vector<int> final;
 
 
 #endif
