@@ -72,7 +72,9 @@ void calculate_stat_for_vector(string name, vector<int> v){
     int v_sum = v[0];
     int size = v.size();
     vector<int> sorted_v;
+    sorted_v.push_back(v[0]);
     for (int i = 1; i < v.size(); i++){
+        //cout << v[i] << ", " ;
         sorted_v.push_back(v[i]);
         v_sum += v[i];
         if (v[i] < v_min)
@@ -83,18 +85,27 @@ void calculate_stat_for_vector(string name, vector<int> v){
 
     sort(sorted_v.begin(), sorted_v.end());
     float v_median, v_Q1, v_Q3;
+    //printf("size: %d \n", size);
+    int half_size = 0;
     if (size % 2 == 0){
-        v_median = (sorted_v[size / 2] +  sorted_v[size / 2 - 1]) / 2;
+        half_size = size / 2 ;
+        v_median = 1.0 * (sorted_v[size / 2] +  sorted_v[size / 2 - 1]) / 2;
     }else{
-        v_median = sorted_v[size / 2 - 1];
+        half_size = size / 2 + 1;
+        v_median = sorted_v[size / 2 ];
     }
-    if (size % 4 == 0 | size % 4 == 1){
-        v_Q1 = 1.0 * (sorted_v[size / 4] +  sorted_v[size / 4 - 1]) / 2;
-        v_Q3 = 1.0 * (sorted_v[3 * size / 4] +  sorted_v[3 * size / 4 + 1]) / 2;
+    if (half_size % 2 == 0){
+        v_Q1 = 1.0 * (sorted_v[half_size / 2] +  sorted_v[half_size / 2 - 1]) / 2;
     }else{
-        v_Q1 = 1.0 * sorted_v[size / 4 - 1];
-        v_Q3 = 1.0 * sorted_v[3 * size / 4 - 1]; //ToDo : check "-1"
+        v_Q1 = 1.0 * sorted_v[half_size / 2];
     }
+    int second_size = size - half_size;
+    if (second_size % 2 == 0){
+        v_Q3 = 1.0 * (sorted_v[half_size + half_size / 2 ] +  sorted_v[half_size + half_size / 2 - 1]) / 2;
+    }else{
+        v_Q3 = 1.0 * sorted_v[half_size + half_size / 2 - 1 ];
+    }
+
 
     printf("%s: Max - %d, min - %d, median - %.3lf, Q1 - %.3lf, Q3 - %.3lf \n",
            name.c_str(), v_max, v_min, v_median, v_Q1, v_Q3);
@@ -121,8 +132,8 @@ void allocate_memory_hierarchy_stucture(){
 void main_pipeline(){
     calculate_stat_for_vector("Midterm", midterm);
     calculate_stat_for_vector("Final", final);
-    vector<int> tmp {13, 15, 16, 16, 19, 20, 20, 21, 22, 22, 25, 25, 25, 25, 30, 33, 33, 35, 35, 35, 35, 36, 40, 45, 46, 52, 70};
-    calculate_stat_for_vector("test", tmp);
+//    vector<int> tmp {13, 15, 16, 16, 19, 20, 20, 21, 22, 22, 25, 25, 25, 25, 30, 33, 33, 35, 35, 35, 35, 36, 40, 45, 46, 52, 70} ;
+//    calculate_stat_for_vector("test", tmp);
 }
 
 int main()
