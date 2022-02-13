@@ -4,3 +4,5 @@ rsync -a --exclude '../Advanced_Data_Mining//cmake-build-debug' ../Advanced_Data
 
 #tar cvf assignment_1_ilia_zlatkin.tar mhc.cpp mhc.h makefile PageTable.h PageTable.hpp TLB.h TLB.hpp trace.config
 #scp -r assignment_1_ilia_zlatkin.tar zlatkin@linprog.cs.fsu.edu:/home/grads/zlatkin/.
+
+#tar -cvzf ilya_zlatkin_cap5778_Assignment_1.tar.gz CAP5778_Assignment_1.pdf makefile scores adm.cpp adm.h
